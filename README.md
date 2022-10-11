@@ -10,11 +10,12 @@
 
 # **Run scCURE**<br>
 We can start using scCURE by running the demo data which downloads from the release called 'demo-originaldata'.
-、、、
+
+```
 clear;
 close all;
 addpath('/scCURE/matlab') %it should be ensured that all .m files and the demo data are in the same work path
-、、、
+```
 
 # **Output results**<br>
 
