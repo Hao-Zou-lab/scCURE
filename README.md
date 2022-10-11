@@ -14,7 +14,7 @@ We can start using scCURE by running the demo data which downloads from the rele
 clear;
 close all;
 addpath('/scCURE/matlab') % It should be ensured that all .m files and the demo data are in the same work path
-                                                                                                                                               fileDir = '.\CD8 pre resp.xls';   %read entire file into string
+fileDir = '.\CD8 pre resp.xls';   %read entire file into string
 [data_R_pre, geneList, cell_types1, cell_IDs_unique1, cell_IDs_R_pre] = readData(fileDir);
 
 fileDir = '.\CD8 pre nonresp.xls';   %read entire file into string
@@ -38,7 +38,6 @@ save data_CD8 data_pre cell_IDs_pre data_R_post cell_IDs_R_post data_NR_post cel
 ```
 load data_CD8;
 ```
-
 ### **Step2: gene filtering for random noise reduction using OGFSC**<br> 
 ```
 OGFSC_idx = OGFSC([data_pre, data_R_post], 'plot_option', 1, 'nBins', 20);
@@ -53,22 +52,16 @@ pca_score = score(:,1:5);
 data1_pca = pca_score(1:size(data11,2),:);
 data2_pca = pca_score(size(data11,2)+1:end,:);
 ```
-
 ### **(optional) estimate the number of Gaussian models by AIC**<br> 
-
 ```
 estimateK(data1_pca);
 estimateK(data2_pca);
 ```
-
 ### **Step4:scCURE**<br> 
-
 ```
 [Puri1, Puri2] = scCURE(data1_pca, 5, data2_pca, 3);
 ```
-
 ### **Step5:put 'changed' or 'steady' label for each cell**<br> 
-
 ```
 opt1 = repmat({'changed'}, 1,size(data1_pca,1));
 opt1(Puri1) = {'steady'};
@@ -76,9 +69,7 @@ opt1(Puri1) = {'steady'};
 opt2 = repmat({'changed'}, 1,size(data2_pca,1));
 opt2(Puri2) = {'steady'};
 ```
-
 ### **Step6:save outputs**<br> 
-
 ```
 cellSamples = [repmat({'Pre'},1,size(data1_pca,1)), repmat({'Post'}, 1,size(data2_pca,1))];
 geneList_filtered = geneList(OGFSC_idx);
@@ -91,7 +82,6 @@ save data_processed_R data11  data22  geneList_filtered cellSamples opt data_pre
 ```
 load data_CD8;
 ```
-
 ### **Step2: gene filtering for random noise reduction using OGFSC**<br> 
 ```
 OGFSC_idx = OGFSC([data_pre, data_NR_post], 'plot_option', 1, 'nBins', 20);
@@ -106,22 +96,16 @@ pca_score = score(:,1:5);
 data1_pca = pca_score(1:size(data11,2),:);
 data2_pca = pca_score(size(data11,2)+1:end,:);
 ```
-
 ### **(optional) estimate the number of Gaussian models by AIC**<br> 
-
 ```
 estimateK(data1_pca);
 estimateK(data2_pca);
 ```
-
 ### **Step4:scCURE**<br> 
-
 ```
 [Puri1, Puri2] = scCURE(data1_pca, 5, data2_pca, 3);
 ```
-
 ### **Step5:put 'changed' or 'steady' label for each cell**<br> 
-
 ```
 opt1 = repmat({'changed'}, 1,size(data1_pca,1));
 opt1(Puri1) = {'steady'};
@@ -129,9 +113,7 @@ opt1(Puri1) = {'steady'};
 opt2 = repmat({'changed'}, 1,size(data2_pca,1));
 opt2(Puri2) = {'steady'};
 ```
-
 ### **Step6:save outputs**<br> 
-
 ```
 cellSamples = [repmat({'Pre'},1,size(data1_pca,1)), repmat({'Post'}, 1,size(data2_pca,1))];
 geneList_filtered = geneList(OGFSC_idx);
