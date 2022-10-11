@@ -6,7 +6,7 @@ function [Unchanged1, Unchanged2] = scCURE(data1, K1, data2, K2)
 
 idx1 = [];
 idx2 = [];
-II = 20; % repeat for 10 iterations
+II = 20; % repeat for 20 iterations
 for I = 1:II
     %% build GMM
     GMModel_1 = fitgmdist(data1, K1, 'CovarianceType','full', 'Replicates',5, 'RegularizationValue',0.00001);
@@ -18,16 +18,14 @@ for I = 1:II
     D12 = zeros(K1,K2);
     for i = 1:K1
         mu1 = GMModel_1.mu(i,:);
-        %     sig1 = diag(Sigma1(:,i));
         sig1 = Sigma1(:,:,i);
         for j = 1:K2
             mu2 = GMModel_2.mu(j,:);
-            %         sig2 = diag(Sigma2(:,j));
             sig2 = Sigma2(:,:,j);
-%             D12(i,j) = Bhattacharyya(mu1, sig1, mu2, sig2);
             D12(i,j) = mvgkl(mu1', sig1, mu2', sig2);
         end
     end
+    
     %% find the mutually cloest Gaussian models
     [~, IX] = min(D12,[],2);
     [~, IX2] = min(D12,[],1);
@@ -39,6 +37,7 @@ for I = 1:II
             Pair12 = [Pair12; [i,C]];
         end
     end
+    
     %% assign cells to specific Gaussian models
     cluster1 = cluster(GMModel_1,data1); % Cluster index
     cluster2 = cluster(GMModel_2,data2); % Cluster index
