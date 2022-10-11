@@ -33,8 +33,8 @@ save data_CD8 data_pre cell_IDs_pre data_R_post cell_IDs_R_post data_NR_post cel
 ```
 
 # **Run scCURE**<br> 
-## **Group1:Responders**<br> 
-### **Step1:load scRNA-seq data**<br> 
+## **Group1: Responders**<br> 
+### **Step1: load scRNA-seq data**<br> 
 ```
 load data_CD8;
 ```
@@ -44,7 +44,7 @@ OGFSC_idx = OGFSC([data_pre, data_R_post], 'plot_option', 1, 'nBins', 20);
 data11 = data_pre(OGFSC_idx,:); % pre-treatment sample
 data22 = data_R_post(OGFSC_idx,:); % post-treatment
 ```
-### **Step3:PCA for dimentional reduction**<br> 
+### **Step3: PCA for dimentional reduction**<br> 
 ```
 data = [data11, data22];
 [coeff,score] = pca(data);
@@ -57,11 +57,11 @@ data2_pca = pca_score(size(data11,2)+1:end,:);
 estimateK(data1_pca);
 estimateK(data2_pca);
 ```
-### **Step4:scCURE**<br> 
+### **Step4: scCURE**<br> 
 ```
 [Puri1, Puri2] = scCURE(data1_pca, 5, data2_pca, 3);
 ```
-### **Step5:put 'changed' or 'steady' label for each cell**<br> 
+### **Step5: put 'changed' or 'steady' label for each cell**<br> 
 ```
 opt1 = repmat({'changed'}, 1,size(data1_pca,1));
 opt1(Puri1) = {'steady'};
@@ -69,7 +69,7 @@ opt1(Puri1) = {'steady'};
 opt2 = repmat({'changed'}, 1,size(data2_pca,1));
 opt2(Puri2) = {'steady'};
 ```
-### **Step6:save outputs**<br> 
+### **Step6: save outputs**<br> 
 ```
 cellSamples = [repmat({'Pre'},1,size(data1_pca,1)), repmat({'Post'}, 1,size(data2_pca,1))];
 geneList_filtered = geneList(OGFSC_idx);
@@ -77,8 +77,8 @@ opt = [opt1, opt2];
 save data_processed_R data11  data22  geneList_filtered cellSamples opt data_pre data_R_post geneList cell_IDs_pre cell_IDs_R_post; %output the data
 ```
 
-## **Group1:Non-responders**<br> 
-### **Step1:load scRNA-seq data**<br> 
+## **Group2: Non-responders**<br> 
+### **Step1: load scRNA-seq data**<br> 
 ```
 load data_CD8;
 ```
@@ -88,7 +88,7 @@ OGFSC_idx = OGFSC([data_pre, data_NR_post], 'plot_option', 1, 'nBins', 20);
 data11 = data_pre(OGFSC_idx,:);
 data22 = data_NR_post(OGFSC_idx,:);
 ```
-### **Step3:PCA for dimentional reduction**<br> 
+### **Step3: PCA for dimentional reduction**<br> 
 ```
 data = [data11, data22];
 [coeff,score] = pca(data');
@@ -101,11 +101,11 @@ data2_pca = pca_score(size(data11,2)+1:end,:);
 estimateK(data1_pca);
 estimateK(data2_pca);
 ```
-### **Step4:scCURE**<br> 
+### **Step4: scCURE**<br> 
 ```
 [Puri1, Puri2] = scCURE(data1_pca, 5, data2_pca, 3);
 ```
-### **Step5:put 'changed' or 'steady' label for each cell**<br> 
+### **Step5: put 'changed' or 'steady' label for each cell**<br> 
 ```
 opt1 = repmat({'changed'}, 1,size(data1_pca,1));
 opt1(Puri1) = {'steady'};
@@ -113,7 +113,7 @@ opt1(Puri1) = {'steady'};
 opt2 = repmat({'changed'}, 1,size(data2_pca,1));
 opt2(Puri2) = {'steady'};
 ```
-### **Step6:save outputs**<br> 
+### **Step6: save outputs**<br> 
 ```
 cellSamples = [repmat({'Pre'},1,size(data1_pca,1)), repmat({'Post'}, 1,size(data2_pca,1))];
 geneList_filtered = geneList(OGFSC_idx);
@@ -121,5 +121,5 @@ opt = [opt1, opt2];
 save data_processed_NR data11  data22  geneList_filtered cellSamples opt data_pre data_NR_post geneList cell_IDs_pre cell_IDs_NR_post; %output the data
 ```
 
-### **Output results**<br> 
+## **Output results**<br> 
 
