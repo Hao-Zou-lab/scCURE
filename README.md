@@ -61,13 +61,13 @@ estimateK(data2_pca);
 ```
 [Puri1, Puri2] = scCURE(data1_pca, 5, data2_pca, 3);
 ```
-### **Step5: put 'changed' or 'steady' label for each cell**<br> 
+### **Step5: put 'changed' or 'unchanged' label for each cell**<br> 
 ```
 opt1 = repmat({'changed'}, 1,size(data1_pca,1));
-opt1(Puri1) = {'steady'};
+opt1(Puri1) = {'unchanged'};
 
 opt2 = repmat({'changed'}, 1,size(data2_pca,1));
-opt2(Puri2) = {'steady'};
+opt2(Puri2) = {'unchanged'};
 ```
 ### **Step6: save outputs**<br> 
 ```
@@ -105,13 +105,13 @@ estimateK(data2_pca);
 ```
 [Puri1, Puri2] = scCURE(data1_pca, 5, data2_pca, 3);
 ```
-### **Step5: put 'changed' or 'steady' label for each cell**<br> 
+### **Step5: put 'changed' or 'unchanged' label for each cell**<br> 
 ```
 opt1 = repmat({'changed'}, 1,size(data1_pca,1));
-opt1(Puri1) = {'steady'};
+opt1(Puri1) = {'unchanged'};
 
 opt2 = repmat({'changed'}, 1,size(data2_pca,1));
-opt2(Puri2) = {'steady'};
+opt2(Puri2) = {'unchanged'};
 ```
 ### **Step6: save outputs**<br> 
 ```
