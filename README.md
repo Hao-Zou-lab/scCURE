@@ -47,7 +47,7 @@ data22 = data_R_post(OGFSC_idx,:); % post-treatment
 ### **Step3: PCA for dimentional reduction**<br> 
 ```
 data = [data11, data22];
-[coeff,score] = pca(data);
+[coeff,score] = pca(data');
 pca_score = score(:,1:5);
 data1_pca = pca_score(1:size(data11,2),:);
 data2_pca = pca_score(size(data11,2)+1:end,:);
