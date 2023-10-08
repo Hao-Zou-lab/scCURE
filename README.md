@@ -36,7 +36,7 @@ save data_CD8 data_pre cell_IDs_pre data_R_post cell_IDs_R_post data_NR_post cel
 ## **Group1: Responders**<br> 
 ### **Step1: load scRNA-seq data**<br> 
 ```
-load data_CD8;
+load data_CD8; % data availbel upon request to xzou@fudan.edu.cn
 ```
 ### **Step2: gene filtering for random noise reduction using OGFSC**<br> 
 ```
